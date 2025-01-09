@@ -28,18 +28,21 @@ export default function RootLayout({
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <div className="min-h-screen flex flex-col">
-          <Header onSidebarToggle={toggleSidebar} />
-          <div className="flex flex-1 pt-16">
-            <Sidebar isOpen={isSidebarOpen} />
-            <main className="flex-1 p-4">{children}</main>
-          </div>
-          <Footer />
+ // layout.tsx
+return (
+  <html lang="en">
+    <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <div className="min-h-screen flex flex-col">
+        <Header onSidebarToggle={toggleSidebar} />
+        <div className="flex flex-1">
+          <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+          <main className="flex-1 md:ml-64 pt-16 p-4">
+            {children}
+          </main>
         </div>
-      </body>
-    </html>
-  );
+        <Footer />
+      </div>
+    </body>
+  </html>
+);
 }
