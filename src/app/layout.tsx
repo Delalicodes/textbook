@@ -28,7 +28,7 @@ export default function RootLayout({
     setIsSidebarOpen(!isSidebarOpen);
   };
 
- // layout.tsx
+// layout.tsx
 return (
   <html lang="en">
     <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
@@ -36,11 +36,13 @@ return (
         <Header onSidebarToggle={toggleSidebar} />
         <div className="flex flex-1">
           <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
-          <main className="flex-1 md:ml-64 pt-16 p-4">
-            {children}
-          </main>
+          <div className="flex-1 md:ml-64">
+            <main className="pt-16 p-4">
+              {children}
+            </main>
+            <Footer />
+          </div>
         </div>
-        <Footer />
       </div>
     </body>
   </html>

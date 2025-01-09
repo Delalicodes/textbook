@@ -38,12 +38,12 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       )}
       
       <aside className={`
-        fixed top-0 left-0 h-screen
+        fixed top-0 left-0 h-[100vh]
         w-64 bg-white/80 backdrop-blur-md
         transform ${isOpen ? 'translate-x-0' : '-translate-x-full'}
         md:translate-x-0 transition-all duration-300 ease-in-out
         border-r border-gray-100 shadow-lg z-40
-        flex flex-col
+        flex flex-col overflow-y-auto
       `}>
         {/* Add a top padding to account for header height */}
         <div className="h-16"></div>
