@@ -90,17 +90,17 @@ const lessonContents: Record<string, Record<string, Record<string, LessonContent
           {
             title: 'Counting Song',
             type: 'video',
-            url: '/resources/counting-song'
+            url: 'https://www.youtube.com/watch?v=bGetqbqDVaA'
           },
           {
             title: 'Counting Practice Sheet',
             type: 'worksheet',
-            url: '/resources/counting-worksheet'
+            url: '/resources/worksheets/counting-practice.pdf'
           },
           {
             title: 'Counting Game',
             type: 'game',
-            url: '/games/counting-adventure'
+            url: 'https://www.education.com/game/number-counting/'
           }
         ]
       }
@@ -161,17 +161,17 @@ const lessonContents: Record<string, Record<string, Record<string, LessonContent
           {
             title: '2D Shapes Song',
             type: 'video',
-            url: '/resources/2d-shapes-song'
+            url: 'https://www.youtube.com/watch?v=OEbRDtCAFdU'
           },
           {
             title: 'Shape Drawing Practice',
-            type: 'worksheet',
-            url: '/resources/shape-drawing'
+            type: 'game',
+            url: '/games/shape-drawing'
           },
           {
             title: 'Shape Matching Game',
             type: 'game',
-            url: '/games/shape-match'
+            url: '/games/shape-matching'
           }
         ]
       }
@@ -230,17 +230,17 @@ const lessonContents: Record<string, Record<string, Record<string, LessonContent
           {
             title: 'Properties of Shapes Video',
             type: 'video',
-            url: '/resources/shape-properties'
+            url: 'https://www.youtube.com/watch?v=24Uv8Cl5hvI'
           },
           {
             title: 'Side and Corner Counting',
             type: 'worksheet',
-            url: '/resources/counting-sides'
+            url: '/resources/worksheets/shape-properties-practice.pdf'
           },
           {
             title: 'Shape Properties Game',
             type: 'game',
-            url: '/games/property-detective'
+            url: 'https://www.splashlearn.com/geometry-games'
           }
         ]
       }
@@ -256,9 +256,33 @@ export default function LessonPage() {
   
   const topicSlug = params.topic as string;
   const subtopicSlug = params.subtopic as string;
-  const lessonId = params.lessonId as string;
+  const lessonId = parseInt(params.lessonId as string);
 
-  const lessonContent = lessonContents[topicSlug]?.[subtopicSlug]?.[lessonId];
+  const lessonContent = lessonContents[topicSlug]?.[subtopicSlug]?.[lessonId.toString()];
+  
+  // Get total number of lessons for this subtopic
+  const totalLessons = Object.keys(lessonContents[topicSlug]?.[subtopicSlug] || {}).length;
+  
+  // Calculate next and previous lesson IDs
+  const nextLessonId = lessonId < totalLessons ? lessonId + 1 : null;
+  const prevLessonId = lessonId > 1 ? lessonId - 1 : null;
+  
+  // Check if next/prev lessons exist
+  const hasNextLesson = nextLessonId !== null && lessonContents[topicSlug]?.[subtopicSlug]?.[nextLessonId.toString()];
+  const hasPrevLesson = prevLessonId !== null && lessonContents[topicSlug]?.[subtopicSlug]?.[prevLessonId.toString()];
+
+  // Navigation handlers
+  const handleNextLesson = () => {
+    if (hasNextLesson) {
+      window.location.href = `/chapters/${topicSlug}/${subtopicSlug}/lesson/${nextLessonId}`;
+    }
+  };
+
+  const handlePrevLesson = () => {
+    if (hasPrevLesson) {
+      window.location.href = `/chapters/${topicSlug}/${subtopicSlug}/lesson/${prevLessonId}`;
+    }
+  };
 
   if (!lessonContent) {
     return (
@@ -422,10 +446,26 @@ export default function LessonPage() {
 
         {/* Navigation Buttons */}
         <div className="flex justify-between pt-6">
-          <button className="bg-gray-200 text-gray-700 px-6 py-3 rounded-lg hover:bg-gray-300 flex items-center gap-2">
+          <button 
+            className={`px-6 py-3 rounded-lg flex items-center gap-2 ${
+              hasPrevLesson 
+                ? 'bg-gray-200 text-gray-700 hover:bg-gray-300' 
+                : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+            }`}
+            onClick={handlePrevLesson}
+            disabled={!hasPrevLesson}
+          >
             <FaArrowLeft /> Previous Lesson
           </button>
-          <button className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 flex items-center gap-2">
+          <button 
+            className={`px-6 py-3 rounded-lg flex items-center gap-2 ${
+              hasNextLesson 
+                ? 'bg-blue-500 text-white hover:bg-blue-600' 
+                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+            }`}
+            onClick={handleNextLesson}
+            disabled={!hasNextLesson}
+          >
             Next Lesson <FaArrowRight />
           </button>
         </div>
