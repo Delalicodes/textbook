@@ -12,12 +12,15 @@ interface Lesson {
   objectives: string[];
 }
 
-const subtopicLessons: Record<string, Record<string, {
-  title: string;
-  color: string;
-  description: string;
-  lessons: Lesson[];
-}>> = {
+// Helper function to create URL-friendly slugs
+function createSlug(text: string): string {
+  return text.toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+}
+
+// Initial lessons data
+const lessonsData = {
   'numbers-0-100': {
     'counting-objects-1-100': {
       title: 'Counting objects 1-100',
@@ -43,26 +46,6 @@ const subtopicLessons: Record<string, Record<string, {
             'Group objects in tens',
             'Write numbers 11-20'
           ]
-        },
-        {
-          title: 'Counting to Fifty',
-          description: 'Learn to count larger groups of objects',
-          duration: '25 mins',
-          objectives: [
-            'Count objects from 21 to 50',
-            'Group objects in tens and ones',
-            'Skip counting by tens'
-          ]
-        },
-        {
-          title: 'Counting to 100',
-          description: 'Master counting objects up to 100',
-          duration: '30 mins',
-          objectives: [
-            'Count objects from 51 to 100',
-            'Group objects in tens and ones',
-            'Complete number sequences'
-          ]
         }
       ]
     },
@@ -79,26 +62,6 @@ const subtopicLessons: Record<string, Record<string, {
             'Recognize number symbols 1-10',
             'Practice writing numbers 1-10',
             'Match number symbols to quantities'
-          ]
-        },
-        {
-          title: 'Writing Numbers 11-20',
-          description: 'Master writing teen numbers',
-          duration: '20 mins',
-          objectives: [
-            'Understand teen numbers',
-            'Write numbers 11-20',
-            'Read numbers in sequence'
-          ]
-        },
-        {
-          title: 'Writing Two-digit Numbers',
-          description: 'Learn to write numbers up to 100',
-          duration: '25 mins',
-          objectives: [
-            'Write numbers 21-100',
-            'Understand place value',
-            'Read two-digit numbers'
           ]
         }
       ]
@@ -117,16 +80,6 @@ const subtopicLessons: Record<string, Record<string, {
             'Write number names one to ten',
             'Match number names to symbols'
           ]
-        },
-        {
-          title: 'Teen Numbers in Words',
-          description: 'Master writing and reading teen numbers',
-          duration: '25 mins',
-          objectives: [
-            'Read teen number names',
-            'Write teen number names',
-            'Understand number patterns'
-          ]
         }
       ]
     },
@@ -143,26 +96,6 @@ const subtopicLessons: Record<string, Record<string, {
             'Identify numbers in ones place',
             'Count single objects',
             'Write single-digit numbers'
-          ]
-        },
-        {
-          title: 'Understanding Tens',
-          description: 'Learn about groups of ten and the tens place',
-          duration: '20 mins',
-          objectives: [
-            'Group objects into tens',
-            'Count by tens',
-            'Identify numbers in tens place'
-          ]
-        },
-        {
-          title: 'Combining Tens and Ones',
-          description: 'Learn how tens and ones make two-digit numbers',
-          duration: '25 mins',
-          objectives: [
-            'Break numbers into tens and ones',
-            'Build numbers using tens and ones',
-            'Write two-digit numbers'
           ]
         }
       ]
@@ -181,26 +114,6 @@ const subtopicLessons: Record<string, Record<string, {
             'Use the equals sign correctly',
             'Match equal numbers'
           ]
-        },
-        {
-          title: 'Greater Than (>)',
-          description: 'Learn to identify when one number is bigger',
-          duration: '20 mins',
-          objectives: [
-            'Compare quantities',
-            'Use the greater than symbol',
-            'Order numbers from biggest to smallest'
-          ]
-        },
-        {
-          title: 'Less Than (<)',
-          description: 'Learn to identify when one number is smaller',
-          duration: '20 mins',
-          objectives: [
-            'Compare quantities',
-            'Use the less than symbol',
-            'Order numbers from smallest to biggest'
-          ]
         }
       ]
     },
@@ -217,26 +130,6 @@ const subtopicLessons: Record<string, Record<string, {
             'Order numbers 1-20',
             'Fill in missing numbers',
             'Create number sequences'
-          ]
-        },
-        {
-          title: 'Counting Down (Descending)',
-          description: 'Learn to arrange numbers from largest to smallest',
-          duration: '20 mins',
-          objectives: [
-            'Order numbers 20-1',
-            'Count backwards',
-            'Complete descending sequences'
-          ]
-        },
-        {
-          title: 'Mixed Number Ordering',
-          description: 'Practice ordering numbers in different ways',
-          duration: '25 mins',
-          objectives: [
-            'Order random number sets',
-            'Find numbers in between',
-            'Create number patterns'
           ]
         }
       ]
@@ -255,26 +148,6 @@ const subtopicLessons: Record<string, Record<string, {
             'Identify even numbers',
             'Complete number patterns'
           ]
-        },
-        {
-          title: 'Counting by 5s',
-          description: 'Learn to count by fives',
-          duration: '20 mins',
-          objectives: [
-            'Count by 5s to 50',
-            'Group objects in fives',
-            'Recognize patterns in 5s'
-          ]
-        },
-        {
-          title: 'Counting by 10s',
-          description: 'Learn to count by tens to 100',
-          duration: '20 mins',
-          objectives: [
-            'Count by 10s to 100',
-            'Group objects in tens',
-            'Complete sequences of 10s'
-          ]
         }
       ]
     }
@@ -287,183 +160,134 @@ const subtopicLessons: Record<string, Record<string, {
       lessons: [
         {
           title: 'Adding Single Digits',
-          description: 'Learn basic addition facts',
-          duration: '20 mins',
+          description: 'Basic addition with numbers 1-9',
+          duration: '15 mins',
           objectives: [
-            'Add numbers up to 10',
+            'Add numbers up to 9',
             'Use counting on strategy',
             'Practice number bonds'
           ]
-        },
+        }
+      ]
+    }
+  },
+  'length-mass-and-capacity': {
+    'non-standard-units-of-measurement': {
+      title: 'Non-standard Units of Measurement',
+      color: 'yellow',
+      description: 'Learn to measure using everyday objects',
+      lessons: [
         {
-          title: 'Adding with Tens',
-          description: 'Learn to add multiples of 10',
-          duration: '25 mins',
+          title: 'Measuring with Objects',
+          description: 'Use everyday items to measure length',
+          duration: '20 mins',
           objectives: [
-            'Add tens numbers (10, 20, 30...)',
-            'Use place value to add',
-            'Solve word problems with tens'
-          ]
-        },
-        {
-          title: 'Two-digit Addition',
-          description: 'Master adding larger numbers',
-          duration: '30 mins',
-          objectives: [
-            'Add two-digit numbers',
-            'Use regrouping when needed',
-            'Solve real-world addition problems'
+            'Measure with paper clips',
+            'Compare lengths using hand spans',
+            'Record measurements'
           ]
         }
       ]
-    },
-    'subtracting-numbers-within-100': {
-      title: 'Subtracting Numbers within 100',
-      color: 'green',
-      description: 'Master different methods of subtraction',
+    }
+  },
+  '2d-and-3d-shapes': {
+    'basic-2d-shapes': {
+      title: 'Basic 2D Shapes',
+      color: 'pink',
+      description: 'Learn about circles, squares, and triangles',
       lessons: [
         {
-          title: 'Basic Subtraction',
-          description: 'Learn to take away small numbers',
-          duration: '20 mins',
+          title: 'Introduction to Shapes',
+          description: 'Identify basic 2D shapes',
+          duration: '15 mins',
           objectives: [
-            'Subtract numbers within 10',
-            'Use counting back strategy',
-            'Practice basic facts'
-          ]
-        },
-        {
-          title: 'Subtracting Tens',
-          description: 'Learn to subtract multiples of 10',
-          duration: '25 mins',
-          objectives: [
-            'Subtract tens numbers',
-            'Use place value to subtract',
-            'Solve word problems'
-          ]
-        },
-        {
-          title: 'Two-digit Subtraction',
-          description: 'Master subtracting larger numbers',
-          duration: '30 mins',
-          objectives: [
-            'Subtract two-digit numbers',
-            'Use regrouping when needed',
-            'Solve real-world problems'
+            'Recognize circles',
+            'Identify squares',
+            'Spot triangles'
           ]
         }
       ]
-    },
-    'number-bonds-up-to-20': {
-      title: 'Number Bonds up to 20',
-      color: 'green',
-      description: 'Understand number relationships and fact families',
+    }
+  },
+  'money-ghana-cedi': {
+    'identifying-coins-and-notes': {
+      title: 'Identifying Coins and Notes',
+      color: 'yellow',
+      description: 'Learn to recognize Ghanaian currency',
       lessons: [
         {
-          title: 'Number Bonds to 10',
-          description: 'Learn pairs of numbers that make 10',
+          title: 'Ghanaian Coins',
+          description: 'Learn about different coins',
           duration: '20 mins',
           objectives: [
-            'Find pairs that make 10',
-            'Use ten frames',
-            'Practice quick recall'
-          ]
-        },
-        {
-          title: 'Number Bonds to 20',
-          description: 'Learn pairs of numbers that make 20',
-          duration: '25 mins',
-          objectives: [
-            'Find pairs that make 20',
-            'Use doubles and near doubles',
-            'Solve missing number problems'
+            'Identify coin denominations',
+            'Compare coin values',
+            'Count with coins'
           ]
         }
       ]
-    },
-    'mental-math-strategies': {
-      title: 'Mental Math Strategies',
-      color: 'green',
-      description: 'Learn quick ways to add and subtract in your head',
+    }
+  },
+  'time-and-calendar': {
+    'days-of-the-week': {
+      title: 'Days of the Week',
+      color: 'indigo',
+      description: 'Learn the seven days of the week',
       lessons: [
         {
-          title: 'Doubles and Near Doubles',
-          description: 'Learn to use doubles to add quickly',
-          duration: '20 mins',
+          title: 'Learning the Days',
+          description: 'Memorize days in order',
+          duration: '15 mins',
           objectives: [
-            'Know doubles up to 10+10',
-            'Use doubles to add near numbers',
-            'Practice mental math'
-          ]
-        },
-        {
-          title: 'Making 10',
-          description: 'Use making 10 to add numbers',
-          duration: '20 mins',
-          objectives: [
-            'Bridge through 10',
-            'Break numbers to make 10',
-            'Add three numbers'
+            'Name the days in order',
+            'Identify today and tomorrow',
+            'Understand week sequence'
           ]
         }
       ]
-    },
-    'word-problems': {
-      title: 'Word Problems',
-      color: 'green',
-      description: 'Solve real-world addition and subtraction problems',
+    }
+  },
+  'data-picture-graphs': {
+    'collecting-simple-data': {
+      title: 'Collecting Simple Data',
+      color: 'red',
+      description: 'Learn to gather information',
       lessons: [
         {
-          title: 'Addition Stories',
-          description: 'Solve problems about combining groups',
-          duration: '25 mins',
+          title: 'Gathering Data',
+          description: 'Learn how to collect information',
+          duration: '20 mins',
           objectives: [
-            'Read and understand problems',
-            'Choose the right operation',
-            'Show working out'
-          ]
-        },
-        {
-          title: 'Subtraction Stories',
-          description: 'Solve problems about taking away',
-          duration: '25 mins',
-          objectives: [
-            'Understand subtraction situations',
-            'Choose the right method',
-            'Explain solutions'
+            'Count objects',
+            'Record numbers',
+            'Sort items'
           ]
         }
       ]
-    },
-    'addition-and-subtraction-facts': {
-      title: 'Addition and Subtraction Facts',
-      color: 'green',
-      description: 'Practice basic math facts for quick recall',
+    }
+  },
+  'patterns-and-relationships': {
+    'number-patterns': {
+      title: 'Number Patterns',
+      color: 'orange',
+      description: 'Find patterns in numbers',
       lessons: [
         {
-          title: 'Addition Facts to 20',
-          description: 'Master basic addition facts',
-          duration: '20 mins',
+          title: 'Simple Number Sequences',
+          description: 'Learn to recognize number patterns',
+          duration: '15 mins',
           objectives: [
-            'Learn addition facts',
-            'Practice quick recall',
-            'Use fact families'
-          ]
-        },
-        {
-          title: 'Subtraction Facts to 20',
-          description: 'Master basic subtraction facts',
-          duration: '20 mins',
-          objectives: [
-            'Learn subtraction facts',
-            'Connect to addition',
-            'Practice fact families'
+            'Count by ones',
+            'Find missing numbers',
+            'Continue patterns'
           ]
         }
       ]
     }
   }
 };
+
+const subtopicLessons = lessonsData;
 
 export default function SubtopicPage() {
   const params = useParams();
@@ -472,7 +296,10 @@ export default function SubtopicPage() {
   const topicSlug = params.topic as string;
   const subtopicSlug = params.subtopic as string;
   
-  console.log('Looking for:', { topicSlug, subtopicSlug }); // Debug log
+  // Debug logging
+  console.log('URL Params:', { topicSlug, subtopicSlug });
+  console.log('Available topics:', Object.keys(subtopicLessons));
+  console.log('Available subtopics:', Object.keys(subtopicLessons[topicSlug] || {}));
   
   const subtopic = subtopicLessons[topicSlug]?.[subtopicSlug];
 
@@ -481,7 +308,12 @@ export default function SubtopicPage() {
       <div className="min-h-screen bg-gray-100 p-6 flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-800 mb-4">Subtopic not found</h1>
-          <p className="text-gray-600 mb-4">Looking for: {subtopicSlug}</p>
+          <div className="text-gray-600 mb-4 space-y-2">
+            <p>Debug info:</p>
+            <p>Topic: {topicSlug}</p>
+            <p>Subtopic: {subtopicSlug}</p>
+            <p>Available subtopics: {Object.keys(subtopicLessons[topicSlug] || {}).join(', ')}</p>
+          </div>
           <Link href={`/chapters/${topicSlug}`} className="text-blue-500 hover:text-blue-600">
             Return to Topic
           </Link>

@@ -11,6 +11,13 @@ interface SubTopic {
   icon: any;
 }
 
+// Helper function to create URL-friendly slugs
+function createSlug(text: string): string {
+  return text.toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+}
+
 // Define the subtopics data structure
 const topicSubtopics: Record<string, {
   title: string;
@@ -93,8 +100,223 @@ const topicSubtopics: Record<string, {
         icon: FaBook
       }
     ]
+  },
+  'length-mass-and-capacity': {
+    title: 'Length, Mass and Capacity',
+    color: 'yellow',
+    subtopics: [
+      {
+        title: 'Non-standard units of measurement',
+        description: 'Learn to measure using everyday objects',
+        icon: FaBook
+      },
+      {
+        title: 'Comparing lengths',
+        description: 'Understanding longer and shorter',
+        icon: FaBook
+      },
+      {
+        title: 'Measuring with informal units',
+        description: 'Use informal units to measure objects',
+        icon: FaBook
+      },
+      {
+        title: 'Comparing mass',
+        description: 'Understanding heavier and lighter',
+        icon: FaBook
+      },
+      {
+        title: 'Comparing capacity',
+        description: 'Understanding more and less in containers',
+        icon: FaBook
+      },
+      {
+        title: 'Basic measuring tools',
+        description: 'Introduction to rulers and scales',
+        icon: FaBook
+      }
+    ]
+  },
+  '2d-and-3d-shapes': {
+    title: '2D and 3D Shapes',
+    color: 'pink',
+    subtopics: [
+      {
+        title: 'Basic 2D shapes',
+        description: 'Learn about circles, squares, and triangles',
+        icon: FaBook
+      },
+      {
+        title: 'Properties of 2D shapes',
+        description: 'Understand sides and corners',
+        icon: FaBook
+      },
+      {
+        title: 'Basic 3D shapes',
+        description: 'Explore cubes and spheres',
+        icon: FaBook
+      },
+      {
+        title: 'Shapes in everyday objects',
+        description: 'Find shapes in the world around us',
+        icon: FaBook
+      },
+      {
+        title: 'Drawing simple shapes',
+        description: 'Practice drawing basic shapes',
+        icon: FaBook
+      },
+      {
+        title: 'Pattern making with shapes',
+        description: 'Create patterns using different shapes',
+        icon: FaBook
+      }
+    ]
+  },
+  'money-ghana-cedi': {
+    title: 'Money (Ghana Cedi)',
+    color: 'yellow',
+    subtopics: [
+      {
+        title: 'Identifying coins and notes',
+        description: 'Learn to recognize Ghanaian currency',
+        icon: FaBook
+      },
+      {
+        title: 'Value of different denominations',
+        description: 'Understand the value of money',
+        icon: FaBook
+      },
+      {
+        title: 'Simple money calculations',
+        description: 'Basic addition and subtraction with money',
+        icon: FaBook
+      },
+      {
+        title: 'Shopping problems',
+        description: 'Solve real-world money problems',
+        icon: FaBook
+      },
+      {
+        title: 'Making amounts with coins',
+        description: 'Different ways to make the same amount',
+        icon: FaBook
+      },
+      {
+        title: 'Money word problems',
+        description: 'Practice solving money situations',
+        icon: FaBook
+      }
+    ]
+  },
+  'time-and-calendar': {
+    title: 'Time and Calendar',
+    color: 'indigo',
+    subtopics: [
+      {
+        title: 'Days of the week',
+        description: 'Learn the seven days of the week',
+        icon: FaBook
+      },
+      {
+        title: 'Months of the year',
+        description: 'Learn the twelve months',
+        icon: FaBook
+      },
+      {
+        title: 'Reading time',
+        description: 'Tell time to the hour',
+        icon: FaBook
+      },
+      {
+        title: 'Sequencing daily events',
+        description: 'Order events in time',
+        icon: FaBook
+      },
+      {
+        title: 'Today, yesterday, tomorrow',
+        description: 'Understand basic time concepts',
+        icon: FaBook
+      },
+      {
+        title: 'Duration of activities',
+        description: 'Compare how long things take',
+        icon: FaBook
+      }
+    ]
+  },
+  'data-picture-graphs': {
+    title: 'Data (Picture Graphs)',
+    color: 'red',
+    subtopics: [
+      {
+        title: 'Collecting simple data',
+        description: 'Learn to gather information',
+        icon: FaBook
+      },
+      {
+        title: 'Making picture graphs',
+        description: 'Create simple visual representations',
+        icon: FaBook
+      },
+      {
+        title: 'Reading picture graphs',
+        description: 'Understand information from graphs',
+        icon: FaBook
+      },
+      {
+        title: 'Answering questions from graphs',
+        description: 'Use graphs to answer questions',
+        icon: FaBook
+      },
+      {
+        title: 'Sorting and grouping',
+        description: 'Organize information',
+        icon: FaBook
+      },
+      {
+        title: 'Simple data interpretation',
+        description: 'Make sense of data',
+        icon: FaBook
+      }
+    ]
+  },
+  'patterns-and-relationships': {
+    title: 'Patterns and Relationships',
+    color: 'orange',
+    subtopics: [
+      {
+        title: 'Number patterns',
+        description: 'Find patterns in numbers',
+        icon: FaBook
+      },
+      {
+        title: 'Shape patterns',
+        description: 'Recognize and create shape patterns',
+        icon: FaBook
+      },
+      {
+        title: 'Color patterns',
+        description: 'Work with repeating colors',
+        icon: FaBook
+      },
+      {
+        title: 'Creating patterns',
+        description: 'Make your own patterns',
+        icon: FaBook
+      },
+      {
+        title: 'Extending patterns',
+        description: 'Continue existing patterns',
+        icon: FaBook
+      },
+      {
+        title: 'Finding missing elements',
+        description: 'Complete incomplete patterns',
+        icon: FaBook
+      }
+    ]
   }
-  // Add more topics as needed
 };
 
 export default function TopicPage() {
@@ -140,10 +362,13 @@ export default function TopicPage() {
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {topic.subtopics.map((subtopic, index) => {
           const Icon = subtopic.icon;
+          const subtopicSlug = createSlug(subtopic.title);
+          console.log('Generated URL:', `/chapters/${topicSlug}/${subtopicSlug}`); // Debug log
+          
           return (
             <div key={index} className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow">
               <Link 
-                href={`/chapters/${topicSlug}/${subtopic.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}
+                href={`/chapters/${topicSlug}/${subtopicSlug}`}
                 className="block p-6 h-full"
               >
                 <div className="flex items-center gap-3 mb-3">
