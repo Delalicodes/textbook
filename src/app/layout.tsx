@@ -6,6 +6,7 @@ import Sidebar from '@/components/layouts/sidebar';
 import Footer from '@/components/layouts/footer';
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { LevelProvider } from '../context/LevelContext';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,18 +33,20 @@ export default function RootLayout({
 return (
   <html lang="en">
     <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-      <div className="min-h-screen flex flex-col">
-        <Header onSidebarToggle={toggleSidebar} />
-        <div className="flex flex-1">
-          <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
-          <div className="flex-1 md:ml-64">
-            <main className="pt-16 p-4">
-              {children}
-            </main>
-            <Footer />
+      <LevelProvider>
+        <div className="min-h-screen flex flex-col">
+          <Header onSidebarToggle={toggleSidebar} />
+          <div className="flex flex-1">
+            <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
+            <div className="flex-1 md:ml-64">
+              <main className="pt-16 p-4">
+                {children}
+              </main>
+              <Footer />
+            </div>
           </div>
         </div>
-      </div>
+      </LevelProvider>
     </body>
   </html>
 );
