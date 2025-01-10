@@ -1,11 +1,18 @@
 'use client';
 
-import { FaBook, FaArrowRight } from 'react-icons/fa';
+import { FaBook, FaArrowRight, FaRegClock, FaCoins, FaShapes, FaRuler, FaChartBar, FaPuzzlePiece } from 'react-icons/fa';
+import { IoMdCalculator } from 'react-icons/io';
+import { BsCalendarDate } from 'react-icons/bs';
 import Link from 'next/link';
 import { useLevel } from '@/context/LevelContext';
 
 type ChapterList = {
-  [key: string]: string[];
+  [key: string]: {
+    title: string;
+    icon: any;
+    topics: string[];
+    iconColor: string;
+  }[];
 };
 
 export default function Chapter() {
@@ -14,23 +21,120 @@ export default function Chapter() {
   // Define chapters based on levels with GES curriculum
   const chapters: ChapterList = {
     'Class 1': [
-      'Chapter 1: Numbers (0-100)',
-      'Chapter 2: Addition and Subtraction within 100',
-      'Chapter 3: Length, Mass and Capacity',
-      'Chapter 4: 2D and 3D Shapes',
-      'Chapter 5: Money (Ghana Cedi)',
-      'Chapter 6: Time and Calendar',
-      'Chapter 7: Data (Picture Graphs)',
-      'Chapter 8: Patterns and Relationships'
+      {
+        title: 'Numbers (0-100)',
+        icon: IoMdCalculator,
+        iconColor: 'text-blue-500',
+        topics: [
+          'Counting objects 1-100',
+          'Reading and writing numerals',
+          'Number names in words',
+          'Place values (tens and ones)',
+          'Comparing numbers using >, <, =',
+          'Ordering numbers',
+          'Skip counting by 2s, 5s, 10s'
+        ]
+      },
+      {
+        title: 'Addition and Subtraction within 100',
+        icon: IoMdCalculator,
+        iconColor: 'text-green-500',
+        topics: [
+          'Adding numbers up to 100',
+          'Subtracting numbers within 100',
+          'Number bonds up to 20',
+          'Mental math strategies',
+          'Word problems',
+          'Addition and subtraction facts'
+        ]
+      },
+      {
+        title: 'Length, Mass and Capacity',
+        icon: FaRuler,
+        iconColor: 'text-yellow-500',
+        topics: [
+          'Non-standard units of measurement',
+          'Comparing lengths (longer/shorter)',
+          'Measuring with informal units',
+          'Comparing mass (heavier/lighter)',
+          'Comparing capacity (more/less)',
+          'Basic measuring tools'
+        ]
+      },
+      {
+        title: '2D and 3D Shapes',
+        icon: FaShapes,
+        iconColor: 'text-pink-500',
+        topics: [
+          'Basic 2D shapes (circle, square, triangle)',
+          'Properties of 2D shapes',
+          'Basic 3D shapes (cube, sphere)',
+          'Shapes in everyday objects',
+          'Drawing simple shapes',
+          'Pattern making with shapes'
+        ]
+      },
+      {
+        title: 'Money (Ghana Cedi)',
+        icon: FaCoins,
+        iconColor: 'text-yellow-600',
+        topics: [
+          'Identifying coins and notes',
+          'Value of different denominations',
+          'Simple money calculations',
+          'Shopping problems',
+          'Making amounts with coins',
+          'Money word problems'
+        ]
+      },
+      {
+        title: 'Time and Calendar',
+        icon: FaRegClock,
+        iconColor: 'text-indigo-500',
+        topics: [
+          'Days of the week',
+          'Months of the year',
+          'Reading time (oclock)',
+          'Sequencing daily events',
+          'Today, yesterday, tomorrow',
+          'Duration of activities'
+        ]
+      },
+      {
+        title: 'Data (Picture Graphs)',
+        icon: FaChartBar,
+        iconColor: 'text-red-500',
+        topics: [
+          'Collecting simple data',
+          'Making picture graphs',
+          'Reading picture graphs',
+          'Answering questions from graphs',
+          'Sorting and grouping',
+          'Simple data interpretation'
+        ]
+      },
+      {
+        title: 'Patterns and Relationships',
+        icon: FaPuzzlePiece,
+        iconColor: 'text-orange-500',
+        topics: [
+          'Number patterns',
+          'Shape patterns',
+          'Color patterns',
+          'Creating patterns',
+          'Extending patterns',
+          'Finding missing elements'
+        ]
+      }
     ],
-    'Class 2': ['Chapter 1: Introduction', 'Chapter 2: Basic Shapes'],
-    'Class 3': ['Chapter 1: Introduction', 'Chapter 2: Basic Algebra', 'Chapter 3: Geometry'],
-    'Class 4': ['Chapter 1: Introduction', 'Chapter 2: Basic Algebra', 'Chapter 3: Geometry', 'Chapter 4: Advanced Topics'],
-    'Class 5': ['Chapter 1: Introduction', 'Chapter 2: Basic Algebra', 'Chapter 3: Geometry', 'Chapter 4: Advanced Topics', 'Chapter 5: Statistics'],
-    'Class 6': ['Chapter 1: Introduction', 'Chapter 2: Basic Algebra', 'Chapter 3: Geometry', 'Chapter 4: Advanced Topics', 'Chapter 5: Statistics', 'Chapter 6: Probability'],
-    'JHS 1': ['Chapter 1: Introduction', 'Chapter 2: Algebra', 'Chapter 3: Geometry', 'Chapter 4: Advanced Topics'],
-    'JHS 2': ['Chapter 1: Introduction', 'Chapter 2: Algebra', 'Chapter 3: Geometry', 'Chapter 4: Advanced Topics'],
-    'JHS 3': ['Chapter 1: Introduction', 'Chapter 2: Algebra', 'Chapter 3: Geometry', 'Chapter 4: Advanced Topics']
+    'Class 2': [{title: 'Introduction', icon: FaBook, iconColor: 'text-gray-500', topics: []}],
+    'Class 3': [{title: 'Introduction', icon: FaBook, iconColor: 'text-gray-500', topics: []}],
+    'Class 4': [{title: 'Introduction', icon: FaBook, iconColor: 'text-gray-500', topics: []}],
+    'Class 5': [{title: 'Introduction', icon: FaBook, iconColor: 'text-gray-500', topics: []}],
+    'Class 6': [{title: 'Introduction', icon: FaBook, iconColor: 'text-gray-500', topics: []}],
+    'JHS 1': [{title: 'Introduction', icon: FaBook, iconColor: 'text-gray-500', topics: []}],
+    'JHS 2': [{title: 'Introduction', icon: FaBook, iconColor: 'text-gray-500', topics: []}],
+    'JHS 3': [{title: 'Introduction', icon: FaBook, iconColor: 'text-gray-500', topics: []}]
   };
 
   if (!selectedLevel) {
@@ -65,32 +169,32 @@ export default function Chapter() {
 
       {/* Chapters List */}
       <div className="grid md:grid-cols-2 gap-6 mt-8">
-        {currentChapters.map((chapter: string, index: number) => (
-          <div key={index} className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
-            <h2 className="text-xl font-semibold text-gray-900">{chapter}</h2>
-            <p className="text-gray-700 mt-2">
-              {getChapterDescription(chapter)}
-            </p>
-            <Link href={`/chapters/${chapter.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`} className="text-blue-500 flex items-center mt-4 hover:text-blue-600">
-              Read More <FaArrowRight className="ml-2" />
-            </Link>
-          </div>
-        ))}
+        {currentChapters.map((chapter, index) => {
+          const Icon = chapter.icon;
+          return (
+            <div key={index} className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+              <div className="flex items-center gap-3 mb-4">
+                <Icon className={`text-3xl ${chapter.iconColor}`} />
+                <h2 className="text-xl font-semibold text-gray-900">Chapter {index + 1}: {chapter.title}</h2>
+              </div>
+              <ul className="space-y-2 mb-4">
+                {chapter.topics.map((topic, topicIndex) => (
+                  <li key={topicIndex} className="text-gray-700 flex items-center gap-2">
+                    <span className={`w-2 h-2 rounded-full bg-opacity-80 ${chapter.iconColor.replace('text-', 'bg-')}`}></span>
+                    {topic}
+                  </li>
+                ))}
+              </ul>
+              <Link 
+                href={`/chapters/${chapter.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`} 
+                className={`flex items-center mt-4 hover:opacity-80 ${chapter.iconColor}`}
+              >
+                Start Learning <FaArrowRight className="ml-2" />
+              </Link>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
-}
-
-function getChapterDescription(chapter: string): string {
-  const descriptions: { [key: string]: string } = {
-    'Chapter 1: Numbers (0-100)': 'Learn to count, read, and write numbers from 0 to 100.',
-    'Chapter 2: Addition and Subtraction within 100': 'Master basic addition and subtraction operations.',
-    'Chapter 3: Length, Mass and Capacity': 'Understand basic measurements in everyday life.',
-    'Chapter 4: 2D and 3D Shapes': 'Explore basic geometric shapes and their properties.',
-    'Chapter 5: Money (Ghana Cedi)': 'Learn about Ghanaian currency and basic money calculations.',
-    'Chapter 6: Time and Calendar': 'Understand time, days, weeks, and months.',
-    'Chapter 7: Data (Picture Graphs)': 'Introduction to basic data representation.',
-    'Chapter 8: Patterns and Relationships': 'Discover patterns in numbers and shapes.'
-  };
-  return descriptions[chapter] || 'Explore this chapter to learn more.';
 }
