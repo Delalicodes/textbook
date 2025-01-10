@@ -7,6 +7,7 @@ import {
   FaHome, FaBook, FaPencilAlt, FaQuestionCircle,
   FaCalculator, FaChalkboardTeacher, FaPuzzlePiece, FaTrophy
 } from 'react-icons/fa';
+import { useLevel } from '@/context/LevelContext';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -26,6 +27,7 @@ const menuItems = [
 
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
+  const { selectedLevel } = useLevel();
   
   return (
     <>
@@ -48,6 +50,17 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         {/* Add a top padding to account for header height */}
         <div className="h-16"></div>
         
+        {/* Current Class Level */}
+        {selectedLevel && (
+          <div className="px-4 py-2">
+            <div className="bg-purple-50 rounded-lg p-3">
+              <p className="text-sm text-purple-600 font-medium">
+                Current Class: {selectedLevel}
+              </p>
+            </div>
+          </div>
+        )}
+
         <nav className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-200 hover:scrollbar-thumb-gray-300">
           <ul className="p-4 space-y-1">
             {menuItems.map((item, index) => {
@@ -76,24 +89,26 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
           </ul>
 
           {/* Quick Access */}
-          <div className="p-4 mt-4">
-            <div className="bg-gray-50 rounded-xl p-4">
-              <h3 className="text-sm font-semibold text-gray-600 mb-3 px-2">Quick Access</h3>
-              <ul className="space-y-1">
-                {['Numbers', 'Basic Algebra', 'Geometry'].map((topic, index) => (
-                  <li key={index}>
-                    <Link
-                      href={`/chapters/${topic.toLowerCase().replace(' ', '-')}`}
-                      className="block px-3 py-2 text-sm text-gray-600 hover:bg-white 
-                               hover:text-purple-600 rounded-lg transition-all duration-200"
-                    >
-                      {topic}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+          {selectedLevel && (
+            <div className="p-4 mt-4">
+              <div className="bg-gray-50 rounded-xl p-4">
+                <h3 className="text-sm font-semibold text-gray-600 mb-3 px-2">Quick Access</h3>
+                <ul className="space-y-1">
+                  {['Numbers', 'Basic Algebra', 'Geometry'].map((topic, index) => (
+                    <li key={index}>
+                      <Link
+                        href={`/chapters#${topic.toLowerCase().replace(' ', '-')}`}
+                        className="block px-3 py-2 text-sm text-gray-600 hover:bg-white 
+                                 hover:text-purple-600 rounded-lg transition-all duration-200"
+                      >
+                        {topic}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-          </div>
+          )}
         </nav>
       </aside>
     </>
