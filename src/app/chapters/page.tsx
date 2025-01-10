@@ -18,6 +18,21 @@ type ChapterList = {
 export default function Chapter() {
   const { selectedLevel } = useLevel();
 
+  // Helper function to get the correct URL slug for each chapter
+  const getChapterSlug = (title: string) => {
+    const slugMap: { [key: string]: string } = {
+      'Numbers (0-100)': 'numbers-0-100',
+      'Addition and Subtraction within 100': 'addition-and-subtraction-within-100',
+      'Length, Mass and Capacity': 'length-mass-and-capacity',
+      '2D and 3D Shapes': '2d-and-3d-shapes',
+      'Money (Ghana Cedi)': 'money-ghana-cedi',
+      'Time and Calendar': 'time-and-calendar',
+      'Data (Picture Graphs)': 'data-picture-graphs',
+      'Patterns and Relationships': 'patterns-and-relationships'
+    };
+    return slugMap[title] || title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  };
+
   // Define chapters based on levels with GES curriculum
   const chapters: ChapterList = {
     'Class 1': [
@@ -185,8 +200,11 @@ export default function Chapter() {
                   </li>
                 ))}
               </ul>
+              {/* Debug log */}
+              {console.log('Chapter title:', chapter.title)}
+              {console.log('Generated URL:', chapter.title.toLowerCase().replace(/[^a-z0-9]+/g, '-'))}
               <Link 
-                href={`/chapters/${chapter.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`} 
+                href={`/chapters/${getChapterSlug(chapter.title)}`} 
                 className={`flex items-center mt-4 hover:opacity-80 ${chapter.iconColor}`}
               >
                 Start Learning <FaArrowRight className="ml-2" />
