@@ -1,10 +1,52 @@
+'use client'; // Marking the component as a client component
+
 import { FaRocket, FaBook, FaPencilAlt, FaGamepad } from 'react-icons/fa';
 import { BiSolidCalculator } from 'react-icons/bi';
 import { IoMdTrophy } from 'react-icons/io';
+import { useState } from 'react';
 
 export default function Home() {
+  const [selectedLevel, setSelectedLevel] = useState('Select Class Level'); // State for selected class level
+  const [isDropdownOpen, setDropdownOpen] = useState(false); // State for dropdown visibility
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!isDropdownOpen); // Toggle dropdown visibility
+  };
+
+  const handleSelectLevel = (level: string) => {
+    setSelectedLevel(level); // Set the selected class level
+    setDropdownOpen(false); // Close the dropdown after selection
+  };
+
   return (
     <div className="space-y-8">
+      {/* Class Level Selection Dropdown */}
+      <div className="text-center mt-4">
+        <div className="relative inline-block">
+          <button 
+            onClick={toggleDropdown} 
+            className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-8 py-3 rounded-full font-semibold hover:scale-105 transition-transform flex items-center gap-2 mx-auto"
+          >
+            {selectedLevel}
+          </button>
+          {isDropdownOpen && ( // Conditional rendering of dropdown
+            <div className="absolute bg-gray-800 text-white shadow-lg rounded-lg mt-2">
+              <ul className="p-2">
+                {['Class 1', 'Class 2', 'Class 3', 'Class 4', 'Class 5', 'Class 6', 'JHS 1', 'JHS 2', 'JHS 3'].map((level, index) => (
+                  <li 
+                    key={index} 
+                    className="py-2 px-4 hover:bg-purple-600 cursor-pointer transition-colors"
+                    onClick={() => handleSelectLevel(level)} // Handle level selection
+                  >
+                    {level}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
+
       {/* Hero Section */}
       <section className="text-center space-y-4">
         <h1 className="text-4xl font-bold text-purple-600">Welcome to Math Adventure!</h1>
