@@ -207,6 +207,141 @@ const lessonsData = {
           ]
         }
       ]
+    },
+    'properties-of-2d-shapes': {
+      title: 'Properties of 2D Shapes',
+      color: 'pink',
+      description: 'Understand sides and corners',
+      lessons: [
+        {
+          title: 'Understanding Sides',
+          description: 'Learn about sides in different shapes',
+          duration: '20 mins',
+          objectives: [
+            'Count sides in shapes',
+            'Compare sides of different shapes',
+            'Draw shapes with specific numbers of sides'
+          ]
+        },
+        {
+          title: 'Understanding Corners',
+          description: 'Learn about corners (vertices) in shapes',
+          duration: '20 mins',
+          objectives: [
+            'Identify corners in shapes',
+            'Count corners in different shapes',
+            'Compare corners of different shapes'
+          ]
+        }
+      ]
+    },
+    'basic-3d-shapes': {
+      title: 'Basic 3D Shapes',
+      color: 'pink',
+      description: 'Explore cubes and spheres',
+      lessons: [
+        {
+          title: 'Introduction to 3D Shapes',
+          description: 'Learn about basic three-dimensional shapes',
+          duration: '20 mins',
+          objectives: [
+            'Identify cubes and spheres',
+            'Understand 3D vs 2D shapes',
+            'Recognize real-world 3D shapes'
+          ]
+        },
+        {
+          title: 'Properties of 3D Shapes',
+          description: 'Learn about faces, edges, and vertices',
+          duration: '20 mins',
+          objectives: [
+            'Count faces on 3D shapes',
+            'Identify edges and vertices',
+            'Compare different 3D shapes'
+          ]
+        }
+      ]
+    },
+    'shapes-in-everyday-objects': {
+      title: 'Shapes in Everyday Objects',
+      color: 'pink',
+      description: 'Find shapes in the world around us',
+      lessons: [
+        {
+          title: 'Finding 2D Shapes',
+          description: 'Identify shapes in everyday objects',
+          duration: '15 mins',
+          objectives: [
+            'Spot shapes in the classroom',
+            'Find shapes at home',
+            'Draw objects using shapes'
+          ]
+        },
+        {
+          title: 'Finding 3D Shapes',
+          description: 'Recognize 3D shapes in real life',
+          duration: '15 mins',
+          objectives: [
+            'Identify 3D shapes in objects',
+            'Sort objects by shape',
+            'Describe objects using shape names'
+          ]
+        }
+      ]
+    },
+    'drawing-simple-shapes': {
+      title: 'Drawing Simple Shapes',
+      color: 'pink',
+      description: 'Practice drawing basic shapes',
+      lessons: [
+        {
+          title: 'Drawing 2D Shapes',
+          description: 'Learn techniques for drawing shapes',
+          duration: '20 mins',
+          objectives: [
+            'Draw circles and squares',
+            'Draw triangles and rectangles',
+            'Create compound shapes'
+          ]
+        },
+        {
+          title: 'Drawing 3D Shapes',
+          description: 'Introduction to drawing 3D shapes',
+          duration: '20 mins',
+          objectives: [
+            'Draw simple cubes',
+            'Sketch spheres',
+            'Add depth to shapes'
+          ]
+        }
+      ]
+    },
+    'pattern-making-with-shapes': {
+      title: 'Pattern Making with Shapes',
+      color: 'pink',
+      description: 'Create patterns using different shapes',
+      lessons: [
+        {
+          title: 'Simple Shape Patterns',
+          description: 'Create and continue shape patterns',
+          duration: '15 mins',
+          objectives: [
+            'Create repeating patterns',
+            'Continue shape sequences',
+            'Identify pattern rules'
+          ]
+        },
+        {
+          title: 'Complex Shape Patterns',
+          description: 'Work with multiple shapes in patterns',
+          duration: '20 mins',
+          objectives: [
+            'Mix different shapes in patterns',
+            'Create growing patterns',
+            'Design your own patterns'
+          ]
+        }
+      ]
     }
   },
   'money-ghana-cedi': {
@@ -264,6 +399,91 @@ const lessonsData = {
           ]
         }
       ]
+    },
+    'making-picture-graphs': {
+      title: 'Making Picture Graphs',
+      color: 'red',
+      description: 'Create simple visual representations',
+      lessons: [
+        {
+          title: 'Creating Simple Graphs',
+          description: 'Learn to make basic picture graphs',
+          duration: '20 mins',
+          objectives: [
+            'Draw picture graphs',
+            'Label your graphs',
+            'Represent data visually'
+          ]
+        }
+      ]
+    },
+    'reading-picture-graphs': {
+      title: 'Reading Picture Graphs',
+      color: 'red',
+      description: 'Understand information from graphs',
+      lessons: [
+        {
+          title: 'Understanding Graphs',
+          description: 'Learn to read and understand picture graphs',
+          duration: '15 mins',
+          objectives: [
+            'Identify graph elements',
+            'Count pictures in graphs',
+            'Understand graph keys'
+          ]
+        }
+      ]
+    },
+    'answering-questions-from-graphs': {
+      title: 'Answering Questions from Graphs',
+      color: 'red',
+      description: 'Use graphs to answer questions',
+      lessons: [
+        {
+          title: 'Graph Questions',
+          description: 'Practice answering questions using graphs',
+          duration: '20 mins',
+          objectives: [
+            'Find information in graphs',
+            'Compare data points',
+            'Answer graph questions'
+          ]
+        }
+      ]
+    },
+    'sorting-and-grouping': {
+      title: 'Sorting and Grouping',
+      color: 'red',
+      description: 'Organize information',
+      lessons: [
+        {
+          title: 'Organizing Data',
+          description: 'Learn to sort and group items',
+          duration: '15 mins',
+          objectives: [
+            'Sort by categories',
+            'Group similar items',
+            'Create data groups'
+          ]
+        }
+      ]
+    },
+    'simple-data-interpretation': {
+      title: 'Simple Data Interpretation',
+      color: 'red',
+      description: 'Make sense of data',
+      lessons: [
+        {
+          title: 'Understanding Data',
+          description: 'Learn to interpret simple data',
+          duration: '20 mins',
+          objectives: [
+            'Find patterns in data',
+            'Draw conclusions',
+            'Explain findings'
+          ]
+        }
+      ]
     }
   },
   'patterns-and-relationships': {
@@ -301,7 +521,13 @@ export default function SubtopicPage() {
   console.log('Available topics:', Object.keys(subtopicLessons));
   console.log('Available subtopics:', Object.keys(subtopicLessons[topicSlug] || {}));
   
-  const subtopic = subtopicLessons[topicSlug]?.[subtopicSlug];
+  // Try to find the subtopic with case-insensitive matching
+  const availableSubtopics = Object.keys(subtopicLessons[topicSlug] || {});
+  const matchingSubtopic = availableSubtopics.find(
+    key => key.toLowerCase() === subtopicSlug.toLowerCase()
+  );
+  
+  const subtopic = matchingSubtopic ? subtopicLessons[topicSlug]?.[matchingSubtopic] : null;
 
   if (!subtopic) {
     return (

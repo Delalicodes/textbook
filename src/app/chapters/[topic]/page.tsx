@@ -363,7 +363,12 @@ export default function TopicPage() {
         {topic.subtopics.map((subtopic, index) => {
           const Icon = subtopic.icon;
           const subtopicSlug = createSlug(subtopic.title);
-          console.log('Generated URL:', `/chapters/${topicSlug}/${subtopicSlug}`); // Debug log
+          // Debug logging
+          console.log('Subtopic:', {
+            title: subtopic.title,
+            generatedSlug: subtopicSlug,
+            fullURL: `/chapters/${topicSlug}/${subtopicSlug}`
+          });
           
           return (
             <div key={index} className="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow">
@@ -377,9 +382,10 @@ export default function TopicPage() {
                     {subtopic.title}
                   </h2>
                 </div>
-                <p className="text-gray-600">
-                  {subtopic.description}
-                </p>
+                <div className="flex items-center gap-2 text-gray-600 mb-3">
+                  <span className={`w-2 h-2 rounded-full bg-${topic.color}-500`}></span>
+                  <p>{subtopic.description}</p>
+                </div>
                 <div className={`mt-4 text-${topic.color}-500 flex items-center gap-2`}>
                   <span>Start Learning</span>
                   <FaPlay className="text-sm" />
