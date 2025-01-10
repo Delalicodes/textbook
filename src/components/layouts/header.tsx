@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { FaBook, FaSearch, FaUser, FaBars } from 'react-icons/fa';
-import { useState } from 'react';
 
 // Create a type for the props
 interface HeaderProps {
